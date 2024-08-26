@@ -12,18 +12,21 @@ import java.util.List;
  *
  * @author Lasval
  */
-public class LibrarySystem {
+public class Library {
     private List<Book> books;
     private List<Loan> loans;
 
-    public LibrarySystem(List<Book> books, List<Loan> Loans) {
+    public Library(List<Book> books, List<Loan> Loans) {
         this.books = books;
         this.loans = Loans;
     }
     
      
     
-    public Result registrerBook(Book book)throws IllegalArgumentException{
+    public Result registrerBook(Book book){
+        for (Book b : books)
+            if (b.getTitle().equalsIgnoreCase(b.getTitle()))
+                return new Result(false, "Book"+book.getTitle()+"is already exists in the library");
         books.add(book);
         return new Result(true, "Book "+ book.getTitle() + " successfully registered");
     }
