@@ -45,4 +45,18 @@ public class LibraryManagementTest {
         assertFalse(result.isSuccess());
         assertEquals("No books found matching the query.", result.getMessage());
     }
+   @Test
+    public void registrerBook(){
+        Result result =  library.registrerBook(book);
+        assertTrue(result.isSuccess());
+        assertEquals("Book "+ book.getTitle() + " successfully registered",result.getMessage());
+      }
+    
+    @Test
+    public void registrerBookDuplicate(){
+        library.registrerBook(book);
+        Result result = library.registrerBook(book);
+        assertFalse(result.isSuccess());
+        
+    }
 }
