@@ -6,7 +6,6 @@
 
 package Modelos;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,10 +17,10 @@ public class Book {
     private String title;
     private Author author;
     private String gender;
-    private int publicationYear;
+    private Date publicationYear;
     private boolean isAvailable;
 
-    public Book(String bookId, String title, Author author, String gender, int publicationYear) {
+    public Book(String bookId, String title, Author author, String gender, Date publicationYear) {
         this.bookId = bookId;
         this.title = title;
         this.author =  author;
@@ -30,6 +29,23 @@ public class Book {
         this.isAvailable = true;
     }
 
+    public Book(String bookId, String title, Author author, String gender) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+        this.gender = gender;
+        this.isAvailable = true;
+    }
+
+    public Book(String bookId, String title, String gender, Date publicationYear) {
+        this.bookId = bookId;
+        this.title = title;
+        this.gender = gender;
+        this.publicationYear = publicationYear;
+         this.isAvailable = true;
+    }
+
+    
     public String getBookId() {
         return bookId;
     }
@@ -64,11 +80,11 @@ public class Book {
         this.gender = gender;
     }
 
-    public int getPublicationYear() {
+    public Date getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(int publicationYear) {
+    public void setPublicationYear(Date publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -82,7 +98,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "bookId=" + bookId + ", title=" + title + ", author=" + author + ", gender=" + gender + ", publicationYear=" + publicationYear + ", isAvailable=" + isAvailable + '}';
+        return  String.valueOf(title);
     }
     
     

@@ -6,72 +6,96 @@
 
 package Modelos;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 
 /**
  *
  * @author Lasval
  */
 public class Library {
-    private List<Book> books;
+    private List<Book> books;     
     private List<Loan> loans;
-
-    public Library(List<Book> books, List<Loan> Loans) {
-        this.books = books;
-        this.loans = Loans;
-    }
+    private String nombre;
     
-     
+    public Library(List<Book> books, List<Loan> loans){
+        this.books = books;
+        this.loans = loans;
+        
+    }
+
+    public Library() {
+    }
+
+    
+    
+    
+    
     
     public Result registrerBook(Book book){
-        for (Book b : books)
-            if (b.getTitle().equalsIgnoreCase(b.getTitle()))
-                return new Result(false, "Book"+book.getTitle()+"is already exists in the library");
+        for(Book b: books)
+            if(b.getTitle().equalsIgnoreCase(book.getTitle()))
+                return new Result(false, "Book " + book.getTitle() + " is already exists in the library");
         books.add(book);
         return new Result(true, "Book "+ book.getTitle() + " successfully registered");
     }
     
-    public Result loanBook(String userId,String bookTitle , String loanDate, String expectedReturnDate){
-        for(Book book: books)
-            if(book.getTitle().equalsIgnoreCase(bookTitle))
-                if(book.isIsAvailable()){
-                   book.setIsAvailable(false);
-                   loans.add(new Loan(userId+ 1,book,userId,loanDate,expectedReturnDate));
-                   return new Result(true, "Book loaned successfully.");
-            }else{
-                 return new Result(false, "Book is not available. Book is already loaned out");
-          }
-        return new Result(false, "Book does not exist in the library");
+    public Result loanBook(Loan loan){
+      loans.add(loan);
+      loan.getBook().setIsAvailable(false);
+      return new Result(true, "Book loaned successfully. Your loan id is " + loan.getLoanId());
+         
     }
     
-    public Result returnBook(String loanID, String returnDate){
+    public Result returnBook(Book book){
        for(Loan loan: loans)
-            if(loan.getLoanId().equals(loanID))
-                if(!loan.isIsReturned()){
-                   loan.setIsReturned(true);
-                   loan.getBook().setIsAvailable(true);
-                   return new Result(true, "Book returned successfully.");
-            }else{
-                return new Result(false, "Book is already returned.");
-        }           
-        return new Result(false, "Incorrect loan ID");
+            if(loan.getBook().equals(book) && !loan.isIsReturned()){
+              loan.setIsReturned(true);
+              loan.getBook().setIsAvailable(true);
+              return new Result(true , "Book returned successfully");
+            }
+        return new Result(true, "The book already been returned");
     }
     
-    public Result searchBooks( String query){
+    public DefaultListModel<Book> searchBooks( String query){
+        DefaultListModel<Book> results = new DefaultListModel<>();
         for(Book book: books)
             if(book.getTitle().contains(query))
-                return new Result(true, "Book found."+ book.getTitle());
-        return new Result(false, "No books found matching the query.");
+                results.addElement(book);
+        return results;
         
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public List<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+    
+    
+   
     @Override
     public String toString() {
         return "LibrarySystem{" + "books=" + books + ", loans=" + loans + '}';
     }
-
    
-    
-    
-    
 }

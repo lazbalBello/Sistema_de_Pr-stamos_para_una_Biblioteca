@@ -6,6 +6,8 @@
 
 package Modelos;
 
+import java.util.Date;
+
 /**
  *
  * @author Lasval
@@ -14,11 +16,11 @@ public class Loan {
     private String loanId;
     private Book book;
     private String userId;
-    private String loanDate;
-    private String expectedReturnDate;
+    private Date loanDate;
+    private Date expectedReturnDate;
     private boolean isReturned;
 
-    public Loan(String loanId, Book book, String userId, String loanDate, String expectedReturnDate) {
+    public Loan(String loanId, Book book, String userId, Date loanDate, Date expectedReturnDate) {
         this.loanId = loanId;
         this.book = book;
         this.userId = userId;
@@ -27,6 +29,13 @@ public class Loan {
         this.isReturned = false;
     }
 
+    public Loan(String loanId, Book book, String userId) {
+        this.loanId = loanId;
+        this.book = book;
+        this.userId = userId;
+        this.isReturned = false;
+    }
+    
     public String getLoanId() {
         return loanId;
     }
@@ -51,19 +60,19 @@ public class Loan {
         this.userId = userId;
     }
 
-    public String getLoanDate() {
+    public Date getLoanDate() {
         return loanDate;
     }
 
-    public void setLoanDate(String loanDate) {
+    public void setLoanDate(Date loanDate) {
         this.loanDate = loanDate;
     }
 
-    public String getExpectedReturnDate() {
+    public Date getExpectedReturnDate() {
         return expectedReturnDate;
     }
 
-    public void setExpectedReturnDate(String expectedReturnDate) {
+    public void setExpectedReturnDate(Date expectedReturnDate) {
         this.expectedReturnDate = expectedReturnDate;
     }
 
@@ -77,7 +86,7 @@ public class Loan {
 
     @Override
     public String toString() {
-        return "Loan{" + "loanId=" + loanId + ", book=" + book + ", userId=" + userId + ", loanDate=" + loanDate + ", expectedReturnDate=" + expectedReturnDate + ", isReturned=" + isReturned + '}';
+        return  "loan Id=" + loanId + ", book=" + book +  ", isReturned=" + isReturned ;
     }
     
     
